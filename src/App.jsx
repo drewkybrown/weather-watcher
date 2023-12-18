@@ -1,11 +1,13 @@
 import { useState } from "react";
 
-import "./App.css";
+import "./assets/styles/App.css";
 
 function App() {
   return (
     <>
-      <h1>Welcome to Weather Watcher!</h1>
+      <h1 className="text-3xl font-bold underline">
+        Welcome to Weather Watcher!
+      </h1>
     </>
   );
 }
