@@ -1,6 +1,6 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import SearchBar from "./components/SearchBar/SearchBar";
-import { getWeatherData } from "./services/weatherService";
+import WeatherDisplay from "./components/WeatherDisplay/WeatherDisplay"; // Import the WeatherDisplay component
 import axios from "axios";
 import "./App.css";
 
@@ -16,10 +16,10 @@ function App() {
       const apiKey = import.meta.env.VITE_OPENWEATHER_API_KEY;
 
       const response = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`
+        `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=imperial`
+        // Use 'units=imperial' for Fahrenheit
       );
 
-      // Check if the response contains data
       if (response.data) {
         setWeatherData(response.data);
       } else {
@@ -41,12 +41,8 @@ function App() {
       <SearchBar onSearchSubmit={handleSearchSubmit} />
       {loading && <p>Loading...</p>}
       {error && <p>Error: {error}</p>}
-      {weatherData && (
-        <div>
-          <h2>Weather Data:</h2>
-          <pre>{JSON.stringify(weatherData, null, 2)}</pre>
-        </div>
-      )}
+      {/* Include the WeatherDisplay component here */}
+      <WeatherDisplay weatherData={weatherData} />
     </div>
   );
 }
