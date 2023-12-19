@@ -31,17 +31,17 @@ function App() {
   }, [city]);
 
   return (
-    <div className="bg-slate-800 h-screen flex justify-center items-start">
-      <div className="w-1/5 h-1/3 mt-40 bg-yellow-400">
-        <h1 className="text-slate-800 text-2xl col-span-2 bg-red-400 ">
+    <div className="bg-white h-screen flex justify-center items-start">
+      <div className="w-1/5 h-1/3 mt-40 bg-yellow-400 border-black border-2">
+        <h1 className="text-slate-800 text-2xl col-span-2 bg-red-400 border-black border-2">
           Weather Location
         </h1>
         {/* Location */}
         <Location />
       </div>
 
-      <div className="w-1/3 h-1/3 mt-40 p-10 grid grid cols-2 gap-6 bg-white">
-        <h1 className="text-slate-800 text-2xl col-span-2 bg-blue-300">
+      <div className="w-1/3 h-1/3 mt-40 p-10 grid grid cols-2 gap-6 bg-green-400 border-black border-2">
+        <h1 className="text-slate-800 text-2xl col-span-2 bg-blue-300 border-black border-2">
           Current Weather
         </h1>
         {/* Current */}
