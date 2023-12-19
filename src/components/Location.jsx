@@ -12,7 +12,7 @@ function Location() {
           className="bg-slate-600 border border-slate-500 text-slate-200 placeholder-slate-400 text-md focus:border-slate-400 block w-60 p-2 "
           placeholder="Enter a city"
           onChange={handleCityChange}
-          defaultValue="Tampa"
+          defaultValue=""
         />
       </div>
       ;
