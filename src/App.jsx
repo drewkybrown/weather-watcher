@@ -12,6 +12,7 @@ function App() {
           Weather Location
         </h1>
         {/* Location */}
+        <Location />
       </div>
 
       <div className="w-1/3 h-1/3 mt-40 p-10 grid grid cols-2 gap-6 bg-white">
