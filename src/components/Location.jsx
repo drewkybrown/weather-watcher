@@ -9,7 +9,7 @@ function Location() {
       <div className="flex-align middle justify-center border-black border-2">
         <input
           type="text"
-          className="bg-white text-slate-800 placeholder-slate-200 text-md focus:border-slate-400 block w-60 p-2 border-black border-2"
+          className="bg-white text-slate-800 placeholder-slate-200 text-md focus:border-slate-400 block w-full sm:w-3/4 md:w-2/3 lg:w-1/2 p-2 border-black border-2"
           placeholder="Enter a city"
           onChange={handleCityChange}
           defaultValue="Tampa"
