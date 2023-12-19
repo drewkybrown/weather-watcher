@@ -32,7 +32,7 @@ function App() {
   }, [city]);
 
   return (
-    <div className="bg-white h-screen flex justify-center items-start">
+    <div className="bg-[url('/background.jpg')] min-h-screen w-full bg-cover bg-center flex justify-center items-center">
       <div className="w-1/5 h-1/3 mt-40 bg-white border-black border-2">
         <h1 className="text-slate-800 text-2xl col-span-2 bg-white border-black border-2">
           Weather Location
@@ -42,7 +42,7 @@ function App() {
       </div>
 
       <div className="w-1/3 h-1/3 mt-40 p-10 grid grid-cols-2 gap-6">
-        <h1 className="text-slate-800 text-2xl bg-white col-span-2"></h1>
+        <h1 className="text-slate-800 text-2xl bg col-span-2"></h1>
         {weatherData && (
           <>
             <Current
