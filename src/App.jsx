@@ -16,7 +16,7 @@ function App() {
       const apiKey = import.meta.env.VITE_OPENWEATHER_API_KEY;
 
       const response = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=imperial`
+        `https://api.openweathermap.org/data/3.0/weather?q=${cityName}&appid=${apiKey}&units=imperial`
         // Use 'units=imperial' for Fahrenheit
       );
 
