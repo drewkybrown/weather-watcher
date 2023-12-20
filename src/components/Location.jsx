@@ -7,15 +7,15 @@ function Location({ setCity, stats }) {
 
   return (
     <>
-      <div className="flex-align middle justify-center border-black border-2">
+      <div className="w-full flex items-center justify-center ">
         <input
           type="text"
-          className="bg-white text-slate-800 placeholder-slate-200 text-md focus:border-slate-400 block w-full sm:w-3/4 md:w-2/3 lg:w-1/2 p-2 border-black border-2"
-          placeholder="Enter a city"
+          className="w-full p-3 ml-7 mr-2 border-2 bg-transparent text-slate-500 text-[13px]"
+          placeholder="Enter a city, Zip code, or Airport Code..."
           onChange={handleCityChange}
-          defaultValue="Tampa"
+          defaultValue=""
         />
-        <div className="m-4">
+        <div className="m-0">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -62,7 +62,7 @@ function Location({ setCity, stats }) {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="w-12 h-12 text-slate-200 mt-8"
+              className="w-12 h-12 text-slate-500 mt-8"
             >
               <path
                 strokeLinecap="round"
@@ -73,20 +73,26 @@ function Location({ setCity, stats }) {
           )
         ) : null}
       </div>
-
-      <div className="flex justify-center items-center text-slate-200 mt-8">
-        <p className="font-semibold text-[55px] ">
+      {/* <div that was changed"*/}
+      <div className="flex flex-col justify-center items-center text-slate-200 mt-8">
+        <p className="font-semibold text-[55px]">
           {stats && stats.temp}
           <span className="text-[33px]">°F</span>
         </p>
+        {stats && stats.feelsLike && (
+          <p className="font-semibold text-[18px] mt-1">
+            Feels like: {stats.feelsLike}°F
+          </p>
+        )}
       </div>
 
       <div className="flex justify-center text-slate-300 mt-8 text-[25px] ">
         {stats && stats.condition}
       </div>
 
-      <div className="flex justify-center text-slate-400 mt-5 text-[15px]">
-        Today &#183; {stats && stats.time} | {stats && stats.location}
+      <div className="flex justify-center text-slate-400 mt-5 text-[15px] text-center">
+        Today &#183; {stats && stats.time} |{" "}
+        {stats && `${stats.location}, ${stats.region}, ${stats.country}`}
       </div>
     </>
   );

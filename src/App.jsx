@@ -30,15 +30,18 @@ function App() {
 
   return (
     <div className="bg-[url('/background.jpg')] min-h-screen w-full bg-cover bg-center flex justify-center items-start">
-      <div className="w-1/5 h-1/3 mt-40 bg-white p-10">
+      <div className="w-1/5 h-1/3 mt-40 bg-white p-5">
         {weatherData && (
           <Location
             setCity={setCity}
             stats={{
               temp: weatherData.current.temp_f,
+              feelsLike: weatherData.current.feelslike_f, // Added this
               condition: weatherData.current.condition.text,
               isDay: weatherData.current.is_day,
               location: weatherData.location.name,
+              region: weatherData.location.region, // Added this
+              country: weatherData.location.country, // Added this
               time: weatherData.location.localtime,
             }}
           />
