@@ -2,12 +2,13 @@ import React from "react";
 
 function Current({ stats }) {
   return (
-    <div className="bg-white p-2 text-slate-200 flex flex-col justify-start items-center border-black border-2">
-      <h2 className="text-sm mt-2"></h2>
+    <div className="bg-white p-2 text-slate-400 flex flex-col justify-start items-center border-black border-2">
+      <h2 className="text-sm mt-2">{stats.title}</h2>
       <div className="mt-2">
-        {" "}
-        <span className="text-4xl font-bold">{stats.value}</span>
-        <span className="text-2xl">{stats.unit}</span>
+        <div className="text-4xl font-bold">
+          {stats.value}
+          {stats.unit}
+        </div>
       </div>
       {stats.direction ? (
         <div className="flex mt-4">
@@ -25,7 +26,7 @@ function Current({ stats }) {
               d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"
             />
           </svg>
-          <div className="text-slate-200 ms-2">{stats.direction}</div>
+          <div className="text-slate-400 ms-2">{stats.direction}</div>
         </div>
       ) : null}
     </div>

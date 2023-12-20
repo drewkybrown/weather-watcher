@@ -74,7 +74,7 @@ function Location({ setCity, stats }) {
         ) : null}
       </div>
       {/* <div that was changed"*/}
-      <div className="flex flex-col justify-center items-center text-slate-200 mt-8">
+      <div className="flex flex-col justify-center items-center text-slate-400 mt-8">
         <p className="font-semibold text-[55px]">
           {stats && stats.temp}
           <span className="text-[33px]">°F</span>
@@ -86,7 +86,7 @@ function Location({ setCity, stats }) {
         )}
       </div>
 
-      <div className="flex justify-center text-slate-300 mt-8 text-[25px] ">
+      <div className="flex justify-center text-slate-400 mt-8 text-[25px] ">
         {stats && stats.condition}
       </div>
 
