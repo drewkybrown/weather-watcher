@@ -108,7 +108,7 @@ function App() {
       </div>
       {/* FORECAST DIV UNDER CURRENT LAYOUT*/}
       <div className="absolute bottom-8 w-3/4 text-center mb-8 border-black border-2 ">
-        <h1>FORECAST BOX</h1>
+        {forecastData && <Forecast forecastData={forecastData} />}
       </div>
     </div>
   );
