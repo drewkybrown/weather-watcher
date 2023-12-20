@@ -35,7 +35,7 @@ function App() {
           <Location
             setCity={setCity}
             stats={{
-              temp: weatherData.current.temp_c,
+              temp: weatherData.current.temp_f,
               condition: weatherData.current.condition.text,
               isDay: weatherData.current.is_day,
               location: weatherData.location.name,

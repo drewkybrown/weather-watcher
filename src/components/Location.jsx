@@ -77,7 +77,7 @@ function Location({ setCity, stats }) {
       <div className="flex justify-center items-center text-slate-200 mt-8">
         <p className="font-semibold text-[55px] ">
           {stats && stats.temp}
-          <span className="text-[33px]">°C</span>
+          <span className="text-[33px]">°F</span>
         </p>
       </div>
 
