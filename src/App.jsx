@@ -4,6 +4,8 @@ import Location from "./components/Location";
 
 import "./App.css";
 
+// Function for the App component that returns the JSX for the app
+
 function App() {
   const [city, setCity] = useState("Tampa");
   const [weatherData, setWeatherData] = useState(null);
@@ -36,19 +38,19 @@ function App() {
             setCity={setCity}
             stats={{
               temp: weatherData.current.temp_f,
-              feelsLike: weatherData.current.feelslike_f, // Added this
+              feelsLike: weatherData.current.feelslike_f, // Add feels like temp
               condition: weatherData.current.condition.text,
               isDay: weatherData.current.is_day,
               location: weatherData.location.name,
-              region: weatherData.location.region, // Added this
-              country: weatherData.location.country, // Added this
+              region: weatherData.location.region, // Add weather region
+              country: weatherData.location.country, // Added weather country
               time: weatherData.location.localtime,
             }}
           />
         )}
       </div>
 
-      <div className="w-1/3 h-1/3 mt-40 grid grid-cols-2 gap-6">
+      <div className="w-1/3 h-1/3 mt-40 grid grid-cols-2 gap-9">
         <h1 className="text-slate-800 text-2xl col-span-2"></h1>
         {weatherData && (
           <>
@@ -83,6 +85,10 @@ function App() {
             />
           </>
         )}
+      </div>
+      {/* FORECAST DIV UNDER CURRENT LAYOUT*/}
+      <div className="absolute bottom-8 w-3/4 text-center mb-8 border-black border-2 ">
+        <h1>FORECAST BOX</h1>
       </div>
     </div>
   );
