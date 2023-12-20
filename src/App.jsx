@@ -4,17 +4,14 @@ import Location from "./components/Location";
 
 import "./App.css";
 
-// fetch data from api and store in state variables
 function App() {
   const [city, setCity] = useState("Tampa");
   const [weatherData, setWeatherData] = useState(null);
 
-  // fetch data from api when city changes
   useEffect(() => {
     const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
     const apiUrl = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&aqi=no`;
 
-    // fetch data from api
     fetch(apiUrl)
       .then((res) => {
         if (!res.ok) {
@@ -32,17 +29,24 @@ function App() {
   }, [city]);
 
   return (
-    <div className="bg-[url('/background.jpg')] min-h-screen w-full bg-cover bg-center flex justify-center items-center">
-      <div className="w-1/5 h-1/3 mt-40 bg-white border-black border-2">
-        <h1 className="text-slate-800 text-2xl col-span-2 bg-white border-black border-2">
-          Weather Location
-        </h1>
-        {/* Location */}
-        <Location />
+    <div className="bg-[url('/background.jpg')] min-h-screen w-full bg-cover bg-center flex justify-center items-start">
+      <div className="w-1/5 h-1/3 mt-40 bg-white p-10">
+        {weatherData && (
+          <Location
+            setCity={setCity}
+            stats={{
+              temp: weatherData.current.temp_c,
+              condition: weatherData.current.condition.text,
+              isDay: weatherData.current.is_day,
+              location: weatherData.location.name,
+              time: weatherData.location.localtime,
+            }}
+          />
+        )}
       </div>
 
-      <div className="w-1/3 h-1/3 mt-40 p-10 grid grid-cols-2 gap-6">
-        <h1 className="text-slate-800 text-2xl bg col-span-2"></h1>
+      <div className="w-1/3 h-1/3 mt-40 grid grid-cols-2 gap-6">
+        <h1 className="text-slate-800 text-2xl col-span-2"></h1>
         {weatherData && (
           <>
             <Current

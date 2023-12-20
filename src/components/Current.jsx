@@ -3,7 +3,7 @@ import React from "react";
 function Current({ stats }) {
   return (
     <div className="bg-white p-2 text-slate-200 flex flex-col justify-start items-center border-black border-2">
-      <h2 className="text-sm mt-2">Wind Status</h2>
+      <h2 className="text-sm mt-2"></h2>
       <div className="mt-2">
         {" "}
         <span className="text-4xl font-bold">{stats.value}</span>
