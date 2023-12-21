@@ -1,7 +1,20 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc'
+import { defineConfig } from "vite";
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
-})
+  server: {
+    proxy: {
+      // Proxying API requests for Weather API
+      "/weather-api": {
+        target: "https://api.weatherapi.com/v1/",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/weather-api/, ""),
+      },
+      // Proxying API requests for Tomorrow.io
+      "/tomorrow-api": {
+        target: "https://api.tomorrow.io/v4/weather/",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/tomorrow-api/, ""),
+      },
+    },
+  },
+});

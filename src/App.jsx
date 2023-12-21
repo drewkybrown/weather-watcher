@@ -116,7 +116,7 @@ function App() {
 
   return (
     <div
-      className="flex flex-col w-full h-screen bg-cover bg-center overflow-auto transition-all duration-600 ease-in-out"
+      className="flex flex-col w-full h-screen bg-cover bg-center overflow-auto"
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
       <div className="flex flex-col items-center space-y-4 bg-transparent">
