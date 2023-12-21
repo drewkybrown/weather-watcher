@@ -156,11 +156,11 @@ function Forecast({ forecastData }) {
 
   // Component rendering logic for available forecast data
   return (
-    <div className="flex overflow-x-auto place-content-center bg-transparent">
+    <div className="flex overflow-x-auto place-content-center ">
       {forecastData?.timelines?.daily?.map((day, index) => (
         <div
           key={index}
-          className="bg-transparent p-4 shadow-md rounded-lg mr-4 min-w-max text-white border-2 border-white"
+          className="bg-sky-300 p-4 shadow-md rounded-lg mr-4 min-w-max text-white font-bold border-2 border-white"
         >
           <h3 className="text-lg font-semibold">
             {formatDay(day.time)}

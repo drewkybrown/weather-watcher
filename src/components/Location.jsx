@@ -17,19 +17,19 @@ function Location({ setCity, stats, updateBackgroundImage }) {
       <div className="w-full flex justify-items-center mx-1">
         <input
           type="text"
-          className="w-full p-3 ml-7 mr-2 border-2 bg-transparent text-black text-[17px] placeholder-black"
+          className="w-full p-3 ml-7 mr-2 border-2 bg-sky-100 text-black text-[17px] placeholder-black rounded-xl"
           placeholder="Enter a city, Zip code, or Airport Code..."
           onChange={handleCityChange}
           defaultValue=""
         />
-        <div className="m-0 text">
+        <div className="m-0 text object-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="white"
-            className="w-6 h-6 text-transform scale-100 hover:scale-110 transition-transform duration-300 ease-in-out"
+            className="mt-3 mb-3 w-6 h-6 text-transform scale-100 hover:scale-110 transition-transform duration-300 ease-in-out"
           >
             <path
               strokeLinecap="round"
@@ -45,7 +45,7 @@ function Location({ setCity, stats, updateBackgroundImage }) {
         </div>
       </div>
 
-      <div className="flex justify-center p-1">
+      <div className="flex justify-center p-1 font-sm">
         {stats && stats.isDay !== undefined ? (
           stats.isDay !== 0 ? (
             <svg
@@ -81,7 +81,7 @@ function Location({ setCity, stats, updateBackgroundImage }) {
         ) : null}
       </div>
       {/* <div that was changed"*/}
-      <div className="flex flex-col justify-center items-center text-black mt-2">
+      <div className="flex flex-col justify-center items-center text-white mt-2">
         <p className="font-semibold text-[40px]">
           {stats && stats.temp}
           <span className="text-[33px]">°F</span>
@@ -93,11 +93,11 @@ function Location({ setCity, stats, updateBackgroundImage }) {
         )}
       </div>
 
-      <div className="flex justify-center text-black mt-8 font-bold text-[25px] ">
+      <div className="flex justify-center text-white mt-8 font-bold text-[20px] ">
         {stats && stats.condition}
       </div>
 
-      <div className="flex justify-center text-black mt-5 text-[18px] font-bold text-center">
+      <div className="flex justify-center text-white mt-5 mb-5 text-[13px] font-bold text-center">
         Today &#183; {stats && stats.time} |{" "}
         {stats && `${stats.location}, ${stats.region}, ${stats.country}`}
       </div>

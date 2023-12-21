@@ -2,8 +2,8 @@ import React from "react";
 
 function Current({ stats }) {
   return (
-    <div className="bg-transparent p-2 text-white flex flex-col justify-start items-center">
-      <h2 className="text-sm mt-2">{stats.title}</h2>
+    <div className="p-2 text-white flex flex-col justify-start items-center">
+      <h2 className="text-sm mt-2 ">{stats.title}</h2>
       <div className="mt-2">
         <div className="text-3xl font-bold">
           {stats.value}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import Current from "./components/Current";
 import Location from "./components/Location";
 import Forecast from "./components/Forecast";
@@ -9,24 +9,63 @@ function App() {
   const [weatherData, setWeatherData] = useState(null);
   const [forecastData, setForecastData] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
-  const [backgroundImage, setBackgroundImage] = useState("/default.jpg"); // DELETE THIS LINE IF AS A LAST RESORT
+  const [backgroundImage, setBackgroundImage] = useState("/default.jpg");
 
-  // function to update background image based on weather condition
+  const snowConditions = [
+    // Add snow conditions here
+    "Patchy snow possible",
+    "Blowing snow",
+    "Blizzard",
+    "Patchy light snow",
+    "Light snow",
+    "Patchy moderate snow",
+    "Moderate snow",
+    "Patchy heavy snow",
+    "Heavy snow",
+    "Light snow showers",
+    "Moderate or heavy snow showers",
+  ];
+
+  const rainConditions = [
+    // Add rain conditions here
+    "Patchy rain possible",
+    "Patchy freezing drizzle possible",
+    "Patchy light drizzle",
+    "Light drizzle",
+    "Freezing drizzle",
+    "Heavy freezing drizzle",
+    "Patchy light rain",
+    "Light rain",
+    "Moderate rain at times",
+    "Moderate rain",
+    "Heavy rain at times",
+    "Heavy rain",
+    "Light freezing rain",
+    "Moderate or heavy freezing rain",
+    "Light rain shower",
+    "Moderate or heavy rain shower",
+    "Torrential rain shower",
+  ];
+
   const updateBackgroundImage = (isDay, condition) => {
-    let newBackground = "/default.jpg"; // default background image
+    let newBackground = "/default.jpg"; // Default background image
 
-    // Update the logic to set background based on isDay and condition
-    if (isDay) {
-      newBackground = "/day.jpg";
+    const isSnowCondition = snowConditions.some((snowCond) =>
+      condition.includes(snowCond)
+    );
+    const isRainCondition = rainConditions.some((rainCond) =>
+      condition.includes(rainCond)
+    );
+
+    if (isSnowCondition) {
+      newBackground = isDay ? "/day-snow.jpg" : "/night-snow.jpg";
+    } else if (isRainCondition) {
+      newBackground = isDay ? "/day-rain.jpg" : "/night-rain.jpg";
     } else {
-      newBackground = "/night.jpg";
+      // Fallback to day/night if no specific weather condition is met
+      newBackground = isDay ? "/day.jpg" : "/night.jpg";
     }
 
-    if (condition.includes("Rain")) {
-      newBackground = "/rain.jpg";
-    } else if (condition.includes("Snow")) {
-      newBackground = "/snow.jpg";
-    }
     setBackgroundImage(newBackground);
   };
 
@@ -81,7 +120,7 @@ function App() {
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
       <div className="flex flex-col items-center space-y-4 bg-transparent">
-        <div className="w-1/4 max-h-[60vh] mt-4 p-5 overflow-hidden bg-transparent">
+        <div className="w-1/4 max-h-[60vh] mt-4 p-5 overflow-hidden bg-sky-300 rounded-xl">
           {weatherData && (
             <Location
               setCity={setCity}
@@ -100,10 +139,10 @@ function App() {
           )}
         </div>
 
-        <div className="w-1/3 h-1/3 mt-36 grid grid-cols-2 gap-4 p-4 bg-transparent">
+        <div className="w-1/3 h-1/2 mt-36 grid grid-cols-2 gap-4 p-4 bg-sky-300 rounded-xl">
           {weatherData && (
             <>
-              <div className="flex flex-col items-center justify-center p-2 border border-gray-600 rounded">
+              <div className="flex flex-col items-center justify-center p-2 border-2 border-gray-600 rounded-lg">
                 <Current
                   stats={{
                     title: "Wind Status",
@@ -113,7 +152,7 @@ function App() {
                   }}
                 />
               </div>
-              <div className="flex flex-col items-center justify-center p-2 border border-gray-600 rounded">
+              <div className="flex flex-col items-center justify-center p-2 border-2 border-gray-600 rounded-lg">
                 <Current
                   stats={{
                     title: "Humidity",
@@ -122,7 +161,7 @@ function App() {
                   }}
                 />
               </div>
-              <div className="flex flex-col items-center justify-center p-2 border border-gray-600 rounded">
+              <div className="flex flex-col items-center justify-center p-2 border-2 border-gray-600 rounded-lg">
                 <Current
                   stats={{
                     title: "Visibility",
@@ -131,7 +170,7 @@ function App() {
                   }}
                 />
               </div>
-              <div className="flex flex-col items-center justify-center p-2 border border-gray-600 rounded">
+              <div className="flex flex-col items-center justify-center p-2 border-2 border-gray-600 rounded-lg">
                 <Current
                   stats={{
                     title: "Air Pressure",
@@ -145,8 +184,9 @@ function App() {
         </div>
       </div>
       {/* FORECAST DIV UNDER CURRENT LAYOUT*/}
-      <div className="w-full p-4  bg-transparent">
+      <div className="w-full p-4  ">
         {forecastData && <Forecast forecastData={forecastData} />}
+        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Click me</a>
       </div>
     </div>
   );
