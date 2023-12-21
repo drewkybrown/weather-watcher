@@ -1,6 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-function Location({ setCity, stats }) {
+function Location({ setCity, stats, updateBackgroundImage }) {
+  // useEffect to respond to changes in stats
+  useEffect(() => {
+    if (stats) {
+      updateBackgroundImage(stats.isDay, stats.condition);
+    }
+  }, [stats, updateBackgroundImage]); // Dependency array
+
   const handleCityChange = (e) => {
     setCity(e.target.value);
   };
@@ -10,12 +17,12 @@ function Location({ setCity, stats }) {
       <div className="w-full flex justify-items-center mx-1">
         <input
           type="text"
-          className="w-full p-3 ml-7 mr-2 border-2 bg-transparent text-black text-[13px]"
+          className="w-full p-3 ml-7 mr-2 border-2 bg-transparent text-black text-[17px] placeholder-black"
           placeholder="Enter a city, Zip code, or Airport Code..."
           onChange={handleCityChange}
           defaultValue=""
         />
-        <div className="m-0">
+        <div className="m-0 text">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

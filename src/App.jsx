@@ -9,6 +9,26 @@ function App() {
   const [weatherData, setWeatherData] = useState(null);
   const [forecastData, setForecastData] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
+  const [backgroundImage, setBackgroundImage] = useState("/default.jpg"); // DELETE THIS LINE IF AS A LAST RESORT
+
+  // function to update background image based on weather condition
+  const updateBackgroundImage = (isDay, condition) => {
+    let newBackground = "/default.jpg"; // default background image
+
+    // Update the logic to set background based on isDay and condition
+    if (isDay) {
+      newBackground = "/day.jpg";
+    } else {
+      newBackground = "/night.jpg";
+    }
+
+    if (condition.includes("Rain")) {
+      newBackground = "/rain.jpg";
+    } else if (condition.includes("Snow")) {
+      newBackground = "/snow.jpg";
+    }
+    setBackgroundImage(newBackground);
+  };
 
   useEffect(() => {
     const fetchWeatherData = async () => {
@@ -56,11 +76,12 @@ function App() {
   }, [city]);
 
   return (
-    <div className="bg-flex flex-col w-full h-screen bg-cover bg-center overflow-auto bg-black">
-      {/* [url('/background.jpg')]  */}
-      {/* Container for the top content */}
+    <div
+      className="flex flex-col w-full h-screen bg-cover bg-center overflow-auto"
+      style={{ backgroundImage: `url(${backgroundImage})` }}
+    >
       <div className="flex flex-col items-center space-y-4 bg-transparent">
-        <div className="w-1/4 max-h-[60vh] mt-4 bg-transparent p-5 overflow-hidden bg-white">
+        <div className="w-1/4 max-h-[60vh] mt-4 p-5 overflow-hidden bg-transparent">
           {weatherData && (
             <Location
               setCity={setCity}
@@ -74,14 +95,15 @@ function App() {
                 country: weatherData.location.country, // Added weather country
                 time: weatherData.location.localtime,
               }}
+              updateBackgroundImage={updateBackgroundImage} // PASS THE FUNCTION AS A PROP
             />
           )}
         </div>
 
-        <div className="w-1/3 h-1/3 mt-36 grid grid-cols-2 gap-4 p-4 bg-white">
+        <div className="w-1/3 h-1/3 mt-36 grid grid-cols-2 gap-4 p-4 bg-transparent">
           {weatherData && (
             <>
-              <div className="flex flex-col items-center justify-center p-2 border border-gray-300 rounded">
+              <div className="flex flex-col items-center justify-center p-2 border border-gray-600 rounded">
                 <Current
                   stats={{
                     title: "Wind Status",
@@ -91,7 +113,7 @@ function App() {
                   }}
                 />
               </div>
-              <div className="flex flex-col items-center justify-center p-2 border border-gray-300 rounded">
+              <div className="flex flex-col items-center justify-center p-2 border border-gray-600 rounded">
                 <Current
                   stats={{
                     title: "Humidity",
@@ -100,7 +122,7 @@ function App() {
                   }}
                 />
               </div>
-              <div className="flex flex-col items-center justify-center p-2 border border-gray-300 rounded">
+              <div className="flex flex-col items-center justify-center p-2 border border-gray-600 rounded">
                 <Current
                   stats={{
                     title: "Visibility",
@@ -109,7 +131,7 @@ function App() {
                   }}
                 />
               </div>
-              <div className="flex flex-col items-center justify-center p-2 border border-gray-300 rounded">
+              <div className="flex flex-col items-center justify-center p-2 border border-gray-600 rounded">
                 <Current
                   stats={{
                     title: "Air Pressure",
@@ -123,7 +145,7 @@ function App() {
         </div>
       </div>
       {/* FORECAST DIV UNDER CURRENT LAYOUT*/}
-      <div className="w-full p-4  bg-black">
+      <div className="w-full p-4  bg-transparent">
         {forecastData && <Forecast forecastData={forecastData} />}
       </div>
     </div>
