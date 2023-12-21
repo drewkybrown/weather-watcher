@@ -3,8 +3,38 @@ import React from "react";
 function Forecast({ forecastData }) {
   console.log("Forecast data in component:", forecastData); // Add this line for debugging
   // Helper function to format the date and time
+  // Function to format the day of the week
+  const formatDay = (dateTimeString) => {
+    const days = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+    const date = new Date(dateTimeString);
+    return days[date.getDay()];
+  };
+
+  // Updated formatDateTime to only return the date
   const formatDateTime = (dateTimeString) => {
-    return new Date(dateTimeString).toLocaleString();
+    const date = new Date(dateTimeString);
+    return date.toLocaleDateString(undefined, {
+      day: "numeric",
+      month: "numeric",
+      year: "numeric",
+    });
+  };
+
+  // Function to format the time
+  const formatTime = (dateTimeString) => {
+    const date = new Date(dateTimeString);
+    return date.toLocaleTimeString(undefined, {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
   };
 
   // Helper function to convert Celsius to Fahrenheit
@@ -126,20 +156,22 @@ function Forecast({ forecastData }) {
 
   // Component rendering logic for available forecast data
   return (
-    <div className="space-y-4">
+    <div className="flex overflow-x-auto place-content-center">
       {forecastData?.timelines?.daily?.map((day, index) => (
-        <div key={index} className="bg-white p-4 shadow-md rounded-lg">
+        <div
+          key={index}
+          className="bg-white p-4 shadow-md rounded-lg mr-4 min-w-max"
+        >
           <h3 className="text-lg font-semibold">
-            Date: {formatDateTime(day.time)}
+            {formatDay(day.time)}
+            <span className="text-sm block">{formatDateTime(day.time)}</span>
           </h3>
+          <p className="text-sm">Time: {formatTime(day.time)}</p>
           <p className="text-sm">
-            Weather: {getWeatherDescription(day.values.weatherCodeMax)}
+            H: {celsiusToFahrenheit(day.values.temperatureMax).toFixed(1)}°F
           </p>
           <p className="text-sm">
-            High: {celsiusToFahrenheit(day.values.temperatureMax).toFixed(1)}°F
-          </p>
-          <p className="text-sm">
-            Low: {celsiusToFahrenheit(day.values.temperatureMin).toFixed(1)}°F
+            L: {celsiusToFahrenheit(day.values.temperatureMin).toFixed(1)}°F
           </p>
           <p className="text-sm">
             Sunrise: {formatDateTime(day.values.sunriseTime)}

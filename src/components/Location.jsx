@@ -7,10 +7,10 @@ function Location({ setCity, stats }) {
 
   return (
     <>
-      <div className="w-full flex items-center justify-center ">
+      <div className="w-full flex justify-items-center mx-1">
         <input
           type="text"
-          className="w-full p-3 ml-7 mr-2 border-2 bg-transparent text-slate-500 text-[13px]"
+          className="w-full p-3 ml-7 mr-2 border-2 bg-transparent text-black text-[13px]"
           placeholder="Enter a city, Zip code, or Airport Code..."
           onChange={handleCityChange}
           defaultValue=""
@@ -38,7 +38,7 @@ function Location({ setCity, stats }) {
         </div>
       </div>
 
-      <div className="flex justify-center">
+      <div className="flex justify-center p-1">
         {stats && stats.isDay !== undefined ? (
           stats.isDay !== 0 ? (
             <svg
@@ -47,7 +47,7 @@ function Location({ setCity, stats }) {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="w-14 h-14 text-yellow-300 mt-8"
+              className="w-14 h-14 text-yellow-300 mt-2"
             >
               <path
                 strokeLinecap="round"
@@ -62,7 +62,7 @@ function Location({ setCity, stats }) {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="w-12 h-12 text-yellow-200 mt-8"
+              className="w-12 h-12 text-yellow-200 mt-2"
             >
               <path
                 strokeLinecap="round"
@@ -74,23 +74,23 @@ function Location({ setCity, stats }) {
         ) : null}
       </div>
       {/* <div that was changed"*/}
-      <div className="flex flex-col justify-center items-center text-slate-500 mt-8">
-        <p className="font-semibold text-[55px]">
+      <div className="flex flex-col justify-center items-center text-black mt-2">
+        <p className="font-semibold text-[40px]">
           {stats && stats.temp}
           <span className="text-[33px]">°F</span>
         </p>
         {stats && stats.feelsLike && (
-          <p className="font-semibold text-[18px] mt-1">
+          <p className="font-semibold text-[14px] mt-1">
             Feels like: {stats.feelsLike}°F
           </p>
         )}
       </div>
 
-      <div className="flex justify-center text-slate-500 mt-8 text-[25px] ">
+      <div className="flex justify-center text-black mt-8 font-bold text-[25px] ">
         {stats && stats.condition}
       </div>
 
-      <div className="flex justify-center text-slate-600 mt-5 text-[15px] text-center">
+      <div className="flex justify-center text-black mt-5 text-[18px] font-bold text-center">
         Today &#183; {stats && stats.time} |{" "}
         {stats && `${stats.location}, ${stats.region}, ${stats.country}`}
       </div>

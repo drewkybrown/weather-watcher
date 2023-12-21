@@ -56,63 +56,74 @@ function App() {
   }, [city]);
 
   return (
-    <div className="bg-[url('/background.jpg')] min-h-screen w-full bg-cover bg-center flex justify-center items-start">
-      <div className="w-1/5 h-1/3 mt-36 bg-white p-5 border-black border-4">
-        {weatherData && (
-          <Location
-            setCity={setCity}
-            stats={{
-              temp: weatherData.current.temp_f,
-              feelsLike: weatherData.current.feelslike_f, // Add feels like temp
-              condition: weatherData.current.condition.text,
-              isDay: weatherData.current.is_day,
-              location: weatherData.location.name,
-              region: weatherData.location.region, // Add weather region
-              country: weatherData.location.country, // Added weather country
-              time: weatherData.location.localtime,
-            }}
-          />
-        )}
-      </div>
+    <div className="bg-flex flex-col w-full h-screen bg-cover bg-center overflow-auto bg-black">
+      {/* [url('/background.jpg')]  */}
+      {/* Container for the top content */}
+      <div className="flex flex-col items-center space-y-4 bg-transparent">
+        <div className="w-1/4 max-h-[60vh] mt-4 bg-transparent p-5 overflow-hidden bg-white">
+          {weatherData && (
+            <Location
+              setCity={setCity}
+              stats={{
+                temp: weatherData.current.temp_f,
+                feelsLike: weatherData.current.feelslike_f, // Add feels like temp
+                condition: weatherData.current.condition.text,
+                isDay: weatherData.current.is_day,
+                location: weatherData.location.name,
+                region: weatherData.location.region, // Add weather region
+                country: weatherData.location.country, // Added weather country
+                time: weatherData.location.localtime,
+              }}
+            />
+          )}
+        </div>
 
-      <div className="w-1/3 h-1/3 mt-36 grid grid-cols-2 gap-9">
-        <h1 className="text-slate-800 text-2xl col-span-2"></h1>
-        {weatherData && (
-          <>
-            <Current
-              stats={{
-                title: "Wind Status",
-                value: weatherData.current.wind_mph,
-                unit: "mph",
-                direction: weatherData.current.wind_dir,
-              }}
-            />
-            <Current
-              stats={{
-                title: "Humidity",
-                value: weatherData.current.humidity,
-                unit: "%",
-              }}
-            />
-            <Current
-              stats={{
-                title: "Visibility",
-                value: weatherData.current.vis_miles,
-                unit: "miles",
-              }}
-            />
-            <Current
-              stats={{
-                title: "Air Pressure",
-                value: weatherData.current.pressure_mb,
-                unit: "mb",
-              }}
-            />
-          </>
-        )}
+        <div className="w-1/3 h-1/3 mt-36 grid grid-cols-2 gap-4 p-4 bg-white">
+          {weatherData && (
+            <>
+              <div className="flex flex-col items-center justify-center p-2 border border-gray-300 rounded">
+                <Current
+                  stats={{
+                    title: "Wind Status",
+                    value: weatherData.current.wind_mph,
+                    unit: "mph",
+                    direction: weatherData.current.wind_dir,
+                  }}
+                />
+              </div>
+              <div className="flex flex-col items-center justify-center p-2 border border-gray-300 rounded">
+                <Current
+                  stats={{
+                    title: "Humidity",
+                    value: weatherData.current.humidity,
+                    unit: "%",
+                  }}
+                />
+              </div>
+              <div className="flex flex-col items-center justify-center p-2 border border-gray-300 rounded">
+                <Current
+                  stats={{
+                    title: "Visibility",
+                    value: weatherData.current.vis_miles,
+                    unit: "miles",
+                  }}
+                />
+              </div>
+              <div className="flex flex-col items-center justify-center p-2 border border-gray-300 rounded">
+                <Current
+                  stats={{
+                    title: "Air Pressure",
+                    value: weatherData.current.pressure_mb,
+                    unit: "mb",
+                  }}
+                />
+              </div>
+            </>
+          )}
+        </div>
       </div>
       {/* FORECAST DIV UNDER CURRENT LAYOUT*/}
-      <div className="flex-row border-black border-4">
+      <div className="w-full p-4  bg-black">
         {forecastData && <Forecast forecastData={forecastData} />}
       </div>
     </div>
