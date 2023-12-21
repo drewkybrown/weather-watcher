@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 function Location({ setCity, stats, updateBackgroundImage }) {
+  const [inputValue, setInputValue] = useState(""); // State for input value
   // useEffect to respond to changes in stats
   useEffect(() => {
     if (stats) {
@@ -8,28 +9,33 @@ function Location({ setCity, stats, updateBackgroundImage }) {
     }
   }, [stats, updateBackgroundImage]); // Dependency array
 
-  const handleCityChange = (e) => {
-    setCity(e.target.value);
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Prevents page from refreshing on submit
+    setCity(inputValue);
   };
 
   return (
     <>
-      <div className="w-full flex justify-items-center mx-1">
+      <form onSubmit={handleSubmit} className="display: flex">
         <input
           type="text"
-          className="w-full p-3 ml-7 mr-2 border-2 bg-sky-100 text-black text-[17px] placeholder-black rounded-xl"
+          className="flex-grow p-3 mr-2 border-2 bg-sky-100 text-black text-[17px] placeholder-black rounded-xl"
           placeholder="Enter a city, Zip code, or Airport Code..."
-          onChange={handleCityChange}
-          defaultValue=""
+          onChange={handleInputChange}
+          value={inputValue}
         />
-        <div className="m-0 text object-center">
+        <div>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="white"
-            className="mt-3 mb-3 w-6 h-6 text-transform scale-100 hover:scale-110 transition-transform duration-300 ease-in-out"
+            className="mt-3 mb-3 mr-2 object-right h-6 text-transform scale-100 hover:scale-110 transition-transform duration-300 ease-in-out"
           >
             <path
               strokeLinecap="round"
@@ -43,7 +49,10 @@ function Location({ setCity, stats, updateBackgroundImage }) {
             />
           </svg>
         </div>
-      </div>
+        <button type="submit" style={{ display: "none" }}>
+          Submit
+        </button>
+      </form>
 
       <div className="flex justify-center p-1 font-sm">
         {stats && stats.isDay !== undefined ? (
