@@ -1,17 +1,16 @@
 import React from "react";
 
 function Forecast({ forecastData }) {
-  // helper function to format the date and the time
+  console.log("Forecast data in component:", forecastData); // Add this line for debugging
+  // Helper function to format the date and time
   const formatDateTime = (dateTimeString) => {
     return new Date(dateTimeString).toLocaleString();
   };
 
-  // helper function to format the temperature
+  // Helper function to convert Celsius to Fahrenheit
   const celsiusToFahrenheit = (celsius) => {
     return (celsius * 9) / 5 + 32;
   };
-
-  // Define the weatherCodeMap outside the getWeatherDescription function
 
   // define a map of weather codes
   const weatherCodeMap = {
@@ -111,13 +110,47 @@ function Forecast({ forecastData }) {
     8000: "Thunderstorm",
   };
 
+  // Function to get the weather description based on the code
   const getWeatherDescription = (code) => {
-    const description = weatherCodeMap[code.toString()] || "Unknown";
-    return description;
+    return weatherCodeMap[code.toString()] || "Unknown";
   };
 
-  // Rest of the component rendering logic
-  return <div>{/* JSX code for rendering forecast data */}</div>;
+  // Removing the checks for loading and no data states
+  // if (!forecastData) {
+  //   return <div>Loading forecast data...</div>;
+  // }
+  //
+  // if (!forecastData.daily || forecastData.daily.length === 0) {
+  //   return <div>No forecast data available.</div>;
+  // }
+
+  // Component rendering logic for available forecast data
+  return (
+    <div className="space-y-4">
+      {forecastData?.timelines?.daily?.map((day, index) => (
+        <div key={index} className="bg-white p-4 shadow-md rounded-lg">
+          <h3 className="text-lg font-semibold">
+            Date: {formatDateTime(day.time)}
+          </h3>
+          <p className="text-sm">
+            Weather: {getWeatherDescription(day.values.weatherCodeMax)}
+          </p>
+          <p className="text-sm">
+            High: {celsiusToFahrenheit(day.values.temperatureMax).toFixed(1)}°F
+          </p>
+          <p className="text-sm">
+            Low: {celsiusToFahrenheit(day.values.temperatureMin).toFixed(1)}°F
+          </p>
+          <p className="text-sm">
+            Sunrise: {formatDateTime(day.values.sunriseTime)}
+          </p>
+          <p className="text-sm">
+            Sunset: {formatDateTime(day.values.sunsetTime)}
+          </p>
+        </div>
+      ))}
+    </div>
+  );
 }
 
 export default Forecast;

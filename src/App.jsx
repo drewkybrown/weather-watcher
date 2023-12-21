@@ -2,10 +2,7 @@ import React, { useEffect, useState } from "react";
 import Current from "./components/Current";
 import Location from "./components/Location";
 import Forecast from "./components/Forecast";
-
 import "./App.css";
-
-// Function for the App component that returns the JSX for the app
 
 function App() {
   const [city, setCity] = useState("Tampa");
@@ -14,7 +11,6 @@ function App() {
   const [isFetching, setIsFetching] = useState(false);
 
   useEffect(() => {
-    // Function to fetch weather and forecast data
     const fetchWeatherData = async () => {
       if (!city || isFetching) return;
 
@@ -22,37 +18,46 @@ function App() {
       try {
         const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
         const apiUrl = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&aqi=no`;
-
         const weatherResponse = await fetch(apiUrl);
+
         if (!weatherResponse.ok) {
           throw new Error("Weather data not found");
         }
+
         const weather = await weatherResponse.json();
         setWeatherData(weather);
 
         const forecastApiKey = import.meta.env.VITE_TOMORROW_API_KEY;
         const forecastApiUrl = `https://api.tomorrow.io/v4/weather/forecast?location=${city}&timesteps=daily&apikey=${forecastApiKey}`;
+        console.log("Forecast API URL:", forecastApiUrl); // Added for debugging
 
         const forecastResponse = await fetch(forecastApiUrl);
+
+        if (forecastResponse.status === 429) {
+          throw new Error("Too many requests. Please try again later.");
+        }
+
         if (!forecastResponse.ok) {
           throw new Error("Forecast data not found");
         }
+
         const forecast = await forecastResponse.json();
+        console.log("Raw forecast data:", forecast); // Add this line for debugging
         setForecastData(forecast);
       } catch (err) {
         console.error(err.message);
+        // Consider setting an error state here
       } finally {
         setIsFetching(false);
       }
     };
 
-    // Invoke the fetch function
     fetchWeatherData();
-  }, [city]); // Dependency array includes city
+  }, [city]);
 
   return (
     <div className="bg-[url('/background.jpg')] min-h-screen w-full bg-cover bg-center flex justify-center items-start">
-      <div className="w-1/5 h-1/3 mt-40 bg-white p-5 border-black border-4">
+      <div className="w-1/5 h-1/3 mt-36 bg-white p-5 border-black border-4">
         {weatherData && (
           <Location
             setCity={setCity}
@@ -70,7 +75,7 @@ function App() {
         )}
       </div>
 
-      <div className="w-1/3 h-1/3 mt-40 grid grid-cols-2 gap-9">
+      <div className="w-1/3 h-1/3 mt-36 grid grid-cols-2 gap-9">
         <h1 className="text-slate-800 text-2xl col-span-2"></h1>
         {weatherData && (
           <>
@@ -107,7 +112,7 @@ function App() {
         )}
       </div>
       {/* FORECAST DIV UNDER CURRENT LAYOUT*/}
-      <div className="absolute bottom-8 w-3/4 text-center mb-8 border-black border-2 ">
+      <div className="flex-row border-black border-4">
         {forecastData && <Forecast forecastData={forecastData} />}
       </div>
     </div>
