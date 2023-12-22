@@ -25,7 +25,8 @@
 
 Weather Forecast App is a sleek, user-friendly application designed to provide real-time weather updates and forecasts. It allows users to search for weather data by city, offering a dynamic and engaging experience with background changes reflecting current weather conditions.
 
-## Screenshots
+## Screenshots and Wireframes
+<h1><a href="https://www.figma.com/file/VQvbSMGKwajAijXkqbK7EW/Weather-Watcher?type=design&node-id=0%3A1&mode=design&t=L6v6aRukT3T3lbA2-1">Figma</a></h1>
 
 ![](./public/Screenshot-day-sunny.png)
 ![](./public/Screenshot-night-rain.png)
