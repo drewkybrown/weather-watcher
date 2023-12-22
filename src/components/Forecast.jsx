@@ -1,8 +1,6 @@
 import React from "react";
 
 function Forecast({ forecastData }) {
-  console.log("Forecast data in component:", forecastData); // Add this line for debugging
-  // Helper function to format the date and time
   // Function to format the day of the week
   const formatDay = (dateTimeString) => {
     const days = [
@@ -140,21 +138,11 @@ function Forecast({ forecastData }) {
     8000: "Thunderstorm",
   };
 
-  // Function to get the weather description based on the code
+  // Function to get the weather description based on the code and data points from the Forecast API
   const getWeatherDescription = (code) => {
     return weatherCodeMap[code.toString()] || "Unknown";
   };
 
-  // Removing the checks for loading and no data states
-  // if (!forecastData) {
-  //   return <div>Loading forecast data...</div>;
-  // }
-  //
-  // if (!forecastData.daily || forecastData.daily.length === 0) {
-  //   return <div>No forecast data available.</div>;
-  // }
-
-  // Component rendering logic for available forecast data
   return (
     <div className="flex overflow-x-auto place-content-center ">
       {forecastData?.timelines?.daily?.map((day, index) => (

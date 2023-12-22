@@ -48,7 +48,7 @@ function App() {
   ];
 
   const updateBackgroundImage = (isDay, condition) => {
-    let newBackground = "/default.jpg"; // Default background image
+    let newBackground = "/default.jpg";
 
     const isSnowCondition = snowConditions.some((snowCond) =>
       condition.includes(snowCond)
@@ -88,7 +88,6 @@ function App() {
 
         const forecastApiKey = import.meta.env.VITE_TOMORROW_API_KEY;
         const forecastApiUrl = `https://api.tomorrow.io/v4/weather/forecast?location=${city}&timesteps=daily&apikey=${forecastApiKey}`;
-        console.log("Forecast API URL:", forecastApiUrl); // Added for debugging
 
         const forecastResponse = await fetch(forecastApiUrl);
 
@@ -101,11 +100,10 @@ function App() {
         }
 
         const forecast = await forecastResponse.json();
-        console.log("Raw forecast data:", forecast); // Add this line for debugging
+
         setForecastData(forecast);
       } catch (err) {
         console.error(err.message);
-        // Consider setting an error state here
       } finally {
         setIsFetching(false);
       }
@@ -126,15 +124,15 @@ function App() {
               setCity={setCity}
               stats={{
                 temp: weatherData.current.temp_f,
-                feelsLike: weatherData.current.feelslike_f, // Add feels like temp
+                feelsLike: weatherData.current.feelslike_f,
                 condition: weatherData.current.condition.text,
                 isDay: weatherData.current.is_day,
                 location: weatherData.location.name,
-                region: weatherData.location.region, // Add weather region
-                country: weatherData.location.country, // Added weather country
+                region: weatherData.location.region,
+                country: weatherData.location.country,
                 time: weatherData.location.localtime,
               }}
-              updateBackgroundImage={updateBackgroundImage} // PASS THE FUNCTION AS A PROP
+              updateBackgroundImage={updateBackgroundImage}
             />
           )}
         </div>
@@ -183,7 +181,6 @@ function App() {
           )}
         </div>
       </div>
-      {/* FORECAST DIV UNDER CURRENT LAYOUT*/}
       <div className="w-full p-4  ">
         {forecastData && <Forecast forecastData={forecastData} />}
         <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Click me</a>

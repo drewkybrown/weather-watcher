@@ -1,5 +1,6 @@
 import React from "react";
 
+// Renders the current weather stats from Weather API
 function Current({ stats }) {
   return (
     <div className="p-2 text-white flex flex-col justify-start items-center">

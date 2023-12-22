@@ -89,7 +89,6 @@ function Location({ setCity, stats, updateBackgroundImage }) {
           )
         ) : null}
       </div>
-      {/* <div that was changed"*/}
       <div className="flex flex-col justify-center items-center text-white mt-2">
         <p className="font-semibold text-[40px]">
           {stats && stats.temp}
